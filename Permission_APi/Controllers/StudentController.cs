@@ -7,6 +7,9 @@ using Permission_Application.Dto_s;
 using Permission_Domen.Entityes;
 using Permission_Domen.Enums;
 using System.Security;
+using Permission_Application.Abstractions.Repositories;
+using Permission_Application.Dto_s;
+using Permission_Domen.Entityes;
 
 namespace Permission_APi.Controllers
 {
@@ -26,8 +29,8 @@ namespace Permission_APi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(int id) => Ok(await _student.GetById(id));
 
-        [FilterAttribute(Permissitions.CreateStudent)]
         [HttpPost]
+        [FilterAttribute(Permissitions.CreateStudent)]
         public async Task<IActionResult> Create(StudentDTO student) => Ok(await _student.Create(student));
         
         [HttpPut]
@@ -36,7 +39,6 @@ namespace Permission_APi.Controllers
 
         [HttpDelete]
         [FilterAttribute(Permissitions.DeleteStudent)]
-
         public async Task<IActionResult> Delete(int id) => Ok(await _student.Delete(id));
     }
 }
