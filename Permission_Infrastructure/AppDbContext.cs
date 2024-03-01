@@ -17,5 +17,11 @@ namespace Permission_Infrastructure
         public DbSet<User> Users { get; set; }
         public DbSet<Student> Students { get; set; }
 
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Student>().HasQueryFilter(Student => Student.Name.StartsWith("A"));
+        }
     }
 }

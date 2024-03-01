@@ -43,7 +43,8 @@ namespace Permission_Infrastructure.Repositories
         public async Task<List<Permission_Domen.Entityes.Student>> GetAll()
         {
 
-            return await _appDbContext.Students.ToListAsync();
+            return await _appDbContext.Students
+                .ToListAsync();
 
         }
 
