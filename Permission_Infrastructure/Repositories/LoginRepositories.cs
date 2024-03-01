@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Permission_Infrastructure.Repositories
 {
-    public class Login : ILogin
+    public class LoginRepositories : ILogin
     {
         private readonly IConfiguration _configuration;
 
         private readonly AppDbContext _dbContext;
-        public Login(AppDbContext dbContext, IConfiguration configuration)
+        public LoginRepositories(AppDbContext dbContext, IConfiguration configuration)
         {
             _dbContext = dbContext;
             _configuration = configuration;

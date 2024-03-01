@@ -73,9 +73,9 @@ TokenValidationParameters GetTokenValidationParameters(ConfigurationManager conf
         ClockSkew = TimeSpan.Zero,
     };
 }
-builder.Services.AddScoped<IRegister, Register>();
-builder.Services.AddScoped<ILogin, Login>();
-builder.Services.AddScoped<IStudent, Permission_Infrastructure.Repositories.Student>();
+builder.Services.AddScoped<IRegister, RegisterRepositories>();
+builder.Services.AddScoped<ILogin, LoginRepositories>();
+builder.Services.AddScoped<IStudent, Permission_Infrastructure.Repositories.StudentRepositories>();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplication();

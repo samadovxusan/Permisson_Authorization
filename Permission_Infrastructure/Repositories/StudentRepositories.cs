@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Permission_Infrastructure.Repositories
 {
-    public class Student : IStudent
+    public class StudentRepositories : IStudent
     {
         private readonly AppDbContext _appDbContext;
-        public Student(AppDbContext appDbContextq) => _appDbContext = appDbContextq;
+        public StudentRepositories(AppDbContext appDbContextq) => _appDbContext = appDbContextq;
         public async Task<Permission_Domen.Entityes.Student> Create(StudentDTO studentDTO)
         {
             var stu = new Permission_Domen.Entityes.Student();

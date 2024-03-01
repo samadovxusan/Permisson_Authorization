@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Permission_Application.Repositoryes
+namespace Permission_Domen.Exceptions
 {
-    public class UserRepository
+    public class UserException
     {
     }
 }

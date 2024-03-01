@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Permission_Application.Generic;
+using Permission_Application.Abstractions.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +12,13 @@ namespace Permission_Infrastructure.Generic
 {
     public class GenericRepositories<T> : IGenericRepositories<T> where T : class
     {
-        public DbSet<T> dbSet;
-        private readonly ILogger logger;
+        private readonly AppDbContext _appDbContext;
+        private readonly DbSet<T> dbSet;
+        public GenericRepositories(AppDbContext app)
+        {
+            _appDbContext = app;
+            dbSet = _appDbContext.Set<T>();
+        }
         public async Task<T> CreateAsync(T entity)
         {
             try
@@ -24,7 +29,7 @@ namespace Permission_Infrastructure.Generic
             }
             catch (Exception ex)
             {
-                throw;
+                throw; 
             }
         }
         public async Task<bool> DeleteAsync(Expression<Func<T, bool>> expression)
@@ -37,6 +42,7 @@ namespace Permission_Infrastructure.Generic
                     return false;
 
                 dbSet.Remove(entity);
+                await _appDbContext.SaveChangesAsync();
 
                 return true;
             }
@@ -46,16 +52,9 @@ namespace Permission_Infrastructure.Generic
             }
         }
 
-        public async Task<IQueryable<T>> GetAllAsync(Expression<Func<T, bool>> expression = null)
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            try
-            {
-                return expression is null ? dbSet : dbSet.Where(expression);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            return await dbSet.ToListAsync();
         }
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> expression)
@@ -71,12 +70,27 @@ namespace Permission_Infrastructure.Generic
             }
         }
 
+        public async Task<T> GetByAny(Expression<Func<T, bool>> expression)
+        {
+
+
+            try
+            {
+                var result = await dbSet.FirstOrDefaultAsync(expression);
+                return  result;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<T> UpdateAsync(T entity)
         {
             try
             {
                 var entry = dbSet.Update(entity);
-
+                await _appDbContext.SaveChangesAsync();
                 return entry.Entity;
             }
             catch (Exception ex)
