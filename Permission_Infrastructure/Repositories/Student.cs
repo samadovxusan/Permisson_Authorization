@@ -35,7 +35,8 @@ namespace Permission_Infrastructure.Repositories
             {
                 return null;
             }
-            _appDbContext.Students.Remove(result);
+            result.IsDeleted = true;
+            _appDbContext.Update(result);
             await _appDbContext.SaveChangesAsync();
             return result;
         }
@@ -50,7 +51,9 @@ namespace Permission_Infrastructure.Repositories
 
         public async Task<Permission_Domen.Entityes.Student> GetById(int id)
         {
-            return await _appDbContext.Students.FirstOrDefaultAsync(x => x.Id == id);
+            return await _appDbContext.Students
+                .IgnoreQueryFilters()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Permission_Domen.Entityes.Student> Update(int id, StudentDTO studentDTO)

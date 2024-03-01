@@ -12,8 +12,8 @@ using Permission_Infrastructure;
 namespace Permission_Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240229173112_inir")]
-    partial class inir
+    [Migration("20240301112412_inita")]
+    partial class inita
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,9 +36,15 @@ namespace Permission_Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<DateTime>("DateTimeDeleted")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()

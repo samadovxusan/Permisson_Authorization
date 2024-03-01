@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Permission_Domen.Entityes;
+using Permission_Infrastructure.EntityConfigurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Permission_Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Student>().HasQueryFilter(Student => Student.Name.StartsWith("A"));
+            new StudentConfiguration().Configure(modelBuilder.Entity<Student>());
         }
     }
 }

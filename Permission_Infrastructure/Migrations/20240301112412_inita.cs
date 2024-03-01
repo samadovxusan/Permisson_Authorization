@@ -5,7 +5,7 @@
 namespace Permission_Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class inir : Migration
+    public partial class inita : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
