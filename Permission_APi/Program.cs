@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Permission_APi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,8 +79,11 @@ builder.Services.AddScoped<IStudent, Permission_Infrastructure.Repositories.Stud
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplication();
+
 var app = builder.Build();
 
+AsyncServiceScope scope = app.Services.CreateAsyncScope();
+scope.ServiceProvider.InitiliazeDataAsync();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
