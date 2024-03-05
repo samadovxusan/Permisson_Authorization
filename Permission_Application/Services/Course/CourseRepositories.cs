@@ -12,34 +12,42 @@ namespace Permission_Application.Services.Course
 {
     public class CourseRepositories : ICourseRepositories
     {
-        public Task<Permission_Domen.Entityes.Course> CreateAsync(Permission_Domen.Entityes.Course entity)
+        private readonly ICourseRepositories _courseRepositories;
+
+        public CourseRepositories(ICourseRepositories courseRepositories)
         {
-            throw new NotImplementedException();
+            _courseRepositories = courseRepositories;
         }
 
-        public Task<bool> DeleteAsync(Expression<Func<Permission_Domen.Entityes.Course, bool>> expression)
+        public async Task<Permission_Domen.Entityes.Course> CreateAsync(Permission_Domen.Entityes.Course entity)
         {
-            throw new NotImplementedException();
+            return await _courseRepositories.CreateAsync(entity);
+
         }
 
-        public Task<IEnumerable<Permission_Domen.Entityes.Course>> GetAllAsync()
+        public async Task<bool> DeleteAsync(Expression<Func<Permission_Domen.Entityes.Course, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await _courseRepositories.DeleteAsync(expression);
         }
 
-        public Task<Permission_Domen.Entityes.Course> GetAsync(Expression<Func<Permission_Domen.Entityes.Course, bool>> expression)
+        public async Task<IEnumerable<Permission_Domen.Entityes.Course>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _courseRepositories.GetAllAsync();
+        }
+
+        public async Task<Permission_Domen.Entityes.Course> GetAsync(Expression<Func<Permission_Domen.Entityes.Course, bool>> expression)
+        {
+            return await _courseRepositories.GetAsync(expression);
         }
 
         public Task<Permission_Domen.Entityes.Course> GetByAny(Expression<Func<Permission_Domen.Entityes.Course, bool>> expression)
         {
-            throw new NotImplementedException();
+            return _courseRepositories.GetByAny(expression);
         }
 
-        public Task<Permission_Domen.Entityes.Course> UpdateAsync(Permission_Domen.Entityes.Course entity)
+        public async Task<Permission_Domen.Entityes.Course> UpdateAsync(Permission_Domen.Entityes.Course entity)
         {
-            throw new NotImplementedException();
+            return await _courseRepositories.UpdateAsync(entity);
         }
     }
 }
