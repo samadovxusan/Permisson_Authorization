@@ -2,8 +2,11 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Permission_Application.Abstractions.Repositories;
+using Permission_Application.Services.Course;
 using Permission_Application.Services.Teacher_S;
+using Permission_Application.Services.Course;
 using Permission_Infrastructure.Repositories;
+using CourseRepositories = Permission_Application.Services.Course.CourseRepositories;
 
 namespace Permission_Infrastructure
 {
@@ -20,7 +23,6 @@ namespace Permission_Infrastructure
             services.AddScoped<ITeacherRepositories, TeacherRepositories>();
             services.AddScoped<IServiceTeacher, ServiceTeacher>();
             services.AddScoped<ICourseRepositories, CourseRepositories>();
-
             return services;
         }
 

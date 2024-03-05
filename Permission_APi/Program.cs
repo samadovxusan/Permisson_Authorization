@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Permission_APi.Data;
+using Permission_Application.Services.Course;
 
 var builder = WebApplication.CreateBuilder(args);
 
