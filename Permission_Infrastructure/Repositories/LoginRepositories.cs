@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Permission_Infrastructure.Repositories
 {
-    public class LoginRepositories : ILogin
+    public class LoginRepositories : ILoginRepositories
     {
         private readonly IConfiguration _configuration;
 

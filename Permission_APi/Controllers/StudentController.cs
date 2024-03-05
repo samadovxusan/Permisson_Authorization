@@ -18,8 +18,8 @@ namespace Permission_APi.Controllers
     [Authorize]
     public class StudentController : ControllerBase
     {
-        private readonly IStudent _student;
-        public StudentController(IStudent student) => _student = student;
+        private readonly IStudentRepositories _student;
+        public StudentController(IStudentRepositories student) => _student = student;
 
         [HttpGet]
         [FilterAttribute(Permissitions.GetAllStudents)]

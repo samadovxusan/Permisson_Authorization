@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Permission_Application.Abstractions.Repositories
 {
-    public interface ILogin
+    public interface ILoginRepositories
     {
         Task<string> Loogin(LoginDTO loginDTO);
     }

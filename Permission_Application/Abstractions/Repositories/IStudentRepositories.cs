@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Permission_Application.Abstractions.Repositories
 {
-    public interface IStudent
+    public interface IStudentRepositories
     {
         Task<List<Student>> GetAll();
         Task<Student> GetById(int id);

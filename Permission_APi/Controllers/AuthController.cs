@@ -10,9 +10,9 @@ namespace Permission_APi.Controllers
 
     public class AuthController : ControllerBase
     {
-        private readonly ILogin _login;
-        private readonly IRegister _register;
-        public AuthController(ILogin login, IRegister register)
+        private readonly ILoginRepositories _login;
+        private readonly IRegisterRepositories _register;
+        public AuthController(ILoginRepositories login, IRegisterRepositories register)
         {
             _login = login;
             _register = register;

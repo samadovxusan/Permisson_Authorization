@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Permission_Infrastructure.Repositories
 {
-    public class RegisterRepositories : IRegister
+    public class RegisterRepositories : IRegisterRepositories
     {
         private readonly AppDbContext _appDbContext;
         public RegisterRepositories(AppDbContext appDbContext)

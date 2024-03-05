@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Permission_Infrastructure.Repositories
 {
-    public class StudentRepositories : IStudent
+    public class StudentRepositories : IStudentRepositories
     {
         private readonly AppDbContext _appDbContext;
         public StudentRepositories(AppDbContext appDbContextq) => _appDbContext = appDbContextq;
