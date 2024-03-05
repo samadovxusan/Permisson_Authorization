@@ -19,6 +19,7 @@ namespace Permission_Infrastructure
 
             services.AddScoped<ITeacherRepositories, TeacherRepositories>();
             services.AddScoped<IServiceTeacher, ServiceTeacher>();
+            services.AddScoped<ICourseRepositories, CourseRepositories>();
 
             return services;
         }
