@@ -24,7 +24,7 @@ namespace Permission_Infrastructure.Generic
             try
             {
                 var entry = await dbSet.AddAsync(entity);
-
+               await _appDbContext.SaveChangesAsync();
                 return entry.Entity;
             }
             catch (Exception ex)

@@ -22,6 +22,7 @@ namespace Permission_Application.Services.Teacher_S
             newtech.Name = entity.Name;
             newtech.Description = entity.Description;
             newtech.Price = entity.Price;
+            newtech.PhoneNumber = entity.PhoneNumber;
             newtech.Experience = entity.Experience;
             newtech.CreatedAt = DateTime.UtcNow;
 

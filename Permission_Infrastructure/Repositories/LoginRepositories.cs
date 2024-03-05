@@ -30,6 +30,6 @@ namespace Permission_Infrastructure.Repositories
             var jwtToken = new GeneretTokenServies(_configuration);
             var resust = jwtToken.GenerateToken(newUser);
             return await resust;
-        }
+            }
     }
 }
