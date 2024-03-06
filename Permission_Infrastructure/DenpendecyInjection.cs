@@ -6,7 +6,7 @@ using Permission_Application.Services.Course;
 using Permission_Application.Services.Teacher_S;
 using Permission_Application.Services.Course;
 using Permission_Infrastructure.Repositories;
-using CourseRepositories = Permission_Application.Services.Course.CourseRepositories;
+using CourseRepositories = Permission_Application.Services.Course.CourseServise;
 
 namespace Permission_Infrastructure
 {
@@ -22,7 +22,7 @@ namespace Permission_Infrastructure
 
             services.AddScoped<ITeacherRepositories, TeacherRepositories>();
             services.AddScoped<IServiceTeacher, ServiceTeacher>();
-            services.AddScoped<ICourseRepositories, CourseRepositories>();
+            //services.AddScoped<ICourseRepositories, CourseRepositories>();
             return services;
         }
 

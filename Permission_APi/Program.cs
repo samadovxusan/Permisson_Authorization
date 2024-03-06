@@ -11,6 +11,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Permission_APi.Data;
 using Permission_Application.Services.Course;
+using CourseServise = Permission_Application.Services.Course.CourseServise;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -76,6 +77,9 @@ TokenValidationParameters GetTokenValidationParameters(ConfigurationManager conf
 }
 builder.Services.AddScoped<IRegisterRepositories, RegisterRepositories>();
 builder.Services.AddScoped<ILoginRepositories, LoginRepositories>();
+builder.Services.AddScoped<ICourseRepositories, CourseRepositories>();
+
+
 builder.Services.AddScoped<IStudentRepositories, Permission_Infrastructure.Repositories.StudentRepositories>();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);

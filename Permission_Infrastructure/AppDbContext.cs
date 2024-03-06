@@ -20,8 +20,6 @@ namespace Permission_Infrastructure
         public DbSet<Teacher> Teachers { get; set; }    
         public DbSet<Course> Courses { get; set; }
 
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             new StudentConfiguration().Configure(modelBuilder.Entity<Student>());

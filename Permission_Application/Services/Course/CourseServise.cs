@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Permission_Application.Services.Course
 {
-    public class CourseRepositories : ICourseRepositories
+    public class CourseServise : ICourseServise
     {
         private readonly ICourseRepositories _courseRepositories;
 
-        public CourseRepositories(ICourseRepositories courseRepositories)
+        public CourseServise(ICourseRepositories courseRepositories)
         {
             _courseRepositories = courseRepositories;
         }
