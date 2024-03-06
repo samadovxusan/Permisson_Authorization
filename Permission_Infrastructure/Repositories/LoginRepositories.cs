@@ -21,15 +21,19 @@ namespace Permission_Infrastructure.Repositories
             _dbContext = dbContext;
             _configuration = configuration;
         }
-        public async Task<string> Loogin(LoginDTO user)
+        public async Task<TokenDto> Loogin(LoginDTO user)
         {
 
             var newUser = await _dbContext.
                 Users.FirstOrDefaultAsync(x=> x.Password == user.Password && x.Email == user.Email);
 
             var jwtToken = new GeneretTokenServies(_configuration);
-            var resust = jwtToken.GenerateToken(newUser);
-            return await resust;
+            var result = await jwtToken.GenerateToken(newUser);
+            return new TokenDto() {
+                AccessToken = result,
+                RefreshToken = newUser.RefreshToken,
+                RefreshTokenExpires = DateTime.UtcNow.AddDays(1)
+            };
             }
     }
 }

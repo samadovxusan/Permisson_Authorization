@@ -22,6 +22,9 @@ namespace Permission_Infrastructure.Repositories
         }
         public async Task<Permission_Domen.Entityes.User> Registration(RegisterDTO registerDTO)
         {
+
+            var refrashtoken = Guid.NewGuid().ToString();
+
             var newuser = new User();
             newuser.Name = registerDTO.Name;
             newuser.Email = registerDTO.Email;
@@ -29,6 +32,7 @@ namespace Permission_Infrastructure.Repositories
             newuser.ERole = registerDTO.ERole;
             newuser.Price = registerDTO.Price;
             newuser.CreatedAt = DateTime.UtcNow;
+            newuser.RefreshToken = refrashtoken;
 
             await _appDbContext.AddAsync(newuser);
             await _appDbContext.SaveChangesAsync();

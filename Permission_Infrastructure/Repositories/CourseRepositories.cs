@@ -13,6 +13,7 @@ namespace Permission_Infrastructure.Repositories
     {
         public CourseRepositories(AppDbContext app) : base(app)
         {
+
         }
     }
 }

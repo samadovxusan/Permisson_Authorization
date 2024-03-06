@@ -9,6 +9,6 @@ namespace Permission_Application.Abstractions.Repositories
 {
     public interface ILoginRepositories
     {
-        Task<string> Loogin(LoginDTO loginDTO);
+        Task<TokenDto> Loogin(LoginDTO loginDTO);
     }
 }
