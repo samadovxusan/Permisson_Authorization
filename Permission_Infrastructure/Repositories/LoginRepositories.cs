@@ -32,7 +32,7 @@ namespace Permission_Infrastructure.Repositories
             return new TokenDto() {
                 AccessToken = result,
                 RefreshToken = newUser.RefreshToken,
-                RefreshTokenExpires = DateTime.UtcNow.AddDays(1)
+                RefreshTokenExpires = DateTime.UtcNow.AddDays(7)
             };
             }
     }
