@@ -10,5 +10,6 @@ namespace Permission_Application.Abstractions.Repositories
     public interface ILoginRepositories
     {
         Task<TokenDto> Loogin(LoginDTO loginDTO);
+        Task<TokenDto> ValidateToken(TokenDto loginDTO);
     }
 }

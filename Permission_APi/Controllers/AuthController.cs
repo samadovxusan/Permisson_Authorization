@@ -28,19 +28,14 @@ namespace Permission_APi.Controllers
         public async Task<IActionResult> Login(LoginDTO loginDTO) => Ok(await _login.Loogin(loginDTO));
 
         [HttpPost]
-        public async Task<IActionResult> Refrashtoke(TokenDto tokenDto)
+        public async Task<IActionResult> ReshreshToken(LoginDTO loginDTO)
         {
-
-
-
-            var acses = await _appDbContext.Users.FirstOrDefaultAsync(x => x.RefreshToken == tokenDto.RefreshToken);
-
-            if(acses == null)
+            if (loginDTO == null)
             {
-
+                return BadRequest();
             }
+            return Ok(loginDTO);
         }
-
 
 
     }
