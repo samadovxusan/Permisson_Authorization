@@ -33,6 +33,7 @@ namespace Permission_Infrastructure.Repositories
             newuser.Price = registerDTO.Price;
             newuser.CreatedAt = DateTime.UtcNow;
             newuser.RefreshToken = refrashtoken;
+            newuser.Expridate = DateTime.UtcNow.AddDays(7);
 
             await _appDbContext.AddAsync(newuser);
             await _appDbContext.SaveChangesAsync();

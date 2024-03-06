@@ -14,7 +14,7 @@ namespace Permission_Domen.Entityes
         public string Email { get; set; }
         public string Password { get; set; }
         public string RefreshToken { get; set; }
-
+        public DateTime Expridate {  get; set; }
         public ERole ERole { get; set; }
         public Decimal Price { get; set; }
     }
