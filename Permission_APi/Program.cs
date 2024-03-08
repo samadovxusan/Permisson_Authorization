@@ -78,10 +78,7 @@ TokenValidationParameters GetTokenValidationParameters(ConfigurationManager conf
 builder.Services.AddScoped<IRegisterRepositories, RegisterRepositories>();
 builder.Services.AddScoped<ILoginRepositories, LoginRepositories>();
 builder.Services.AddScoped<ICourseRepositories, CourseRepositories>();
-
-
 builder.Services.AddScoped<IStudentRepositories, Permission_Infrastructure.Repositories.StudentRepositories>();
-
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplication();
 
