@@ -12,8 +12,25 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Permission_APi.Data;
 using Permission_Application.Services.Course;
 using CourseServise = Permission_Application.Services.Course.CourseServise;
+using Permission_APi.Mappers;
+using Serilog;
+
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
+
+builder.Host.UseSerilog((context, configuration) =>
+{
+    configuration.ReadFrom.Configuration(context.Configuration);
+
+    configuration.MinimumLevel.Information()
+        .Enrich.WithProperty("ApplicationContext", "Ocelot.APIGateway")
+        .Enrich.FromLogContext()
+        .WriteTo.File(builder.Configuration["Serilog:LogPath"])
+        .WriteTo.Console()
+        .ReadFrom.Configuration(context.Configuration);
+});
+
 
 
 builder.Services.AddControllers();
@@ -81,6 +98,10 @@ builder.Services.AddScoped<ICourseRepositories, CourseRepositories>();
 builder.Services.AddScoped<IStudentRepositories, Permission_Infrastructure.Repositories.StudentRepositories>();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplication();
+builder.Services.AddAutoMapper(typeof(StudentMapper));
+
+
+
 
 var app = builder.Build();
 

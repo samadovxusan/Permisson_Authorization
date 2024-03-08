@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Permission_Application.Abstractions.Repositories;
 using Permission_Application.Dto_s;
 using Permission_Domen.Entityes;
@@ -13,39 +15,59 @@ namespace Permission_Infrastructure.Repositories
     public class StudentRepositories : IStudentRepositories
     {
         private readonly AppDbContext _appDbContext;
-        public StudentRepositories(AppDbContext appDbContextq) => _appDbContext = appDbContextq;
+        private readonly IMapper _autoMapper;
+        private readonly ILogger<Student> _logger;
+
+        public StudentRepositories(IMapper autoMapper , AppDbContext appDbContext,ILogger<Student> logger)
+        {
+            _autoMapper = autoMapper;
+            _appDbContext = appDbContext;
+            _logger = logger;
+        }
+
         public async Task<Permission_Domen.Entityes.Student> Create(StudentDTO studentDTO)
         {
-            var stu = new Permission_Domen.Entityes.Student();
-            stu.Phone_Number = studentDTO.Phone_Number;
-            stu.Name = studentDTO.Name;
-            stu.UserID = studentDTO.UserID;
-            stu.Email = studentDTO.Email;
-            stu.CreatedAt = DateTime.UtcNow;
-
+            var stu = _autoMapper.Map<Student>(studentDTO);
+            stu.CreatedAt = DateTime.UtcNow; 
             _appDbContext.Students.Add(stu);
             await _appDbContext.SaveChangesAsync();
+
             return stu;
         }
 
         public async Task<Permission_Domen.Entityes.Student> Delete(int id)
         {
-            var result = await _appDbContext.Students.FirstOrDefaultAsync(x => x.Id == id);
-            if(result == null)
+            try
             {
-                return null;
+                var result = await _appDbContext.Students.FirstOrDefaultAsync(x => x.Id == id);
+
+                result.IsDeleted = true;
+                _appDbContext.Update(result);
+                await _appDbContext.SaveChangesAsync();
+                _logger.LogInformation("Ok");
+                return result;
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
             }
-            result.IsDeleted = true;
-            _appDbContext.Update(result);
-            await _appDbContext.SaveChangesAsync();
-            return result;
+          
         }
 
         public async Task<List<Permission_Domen.Entityes.Student>> GetAll()
         {
-
-            return await _appDbContext.Students
+            try
+            {
+                _logger.LogInformation("Test Logs");
+                return await _appDbContext.Students
                 .ToListAsync();
+
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
+            }
 
         }
 

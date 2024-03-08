@@ -10,6 +10,7 @@ namespace Permission_Application
         public static IServiceCollection AddApplication ( this  IServiceCollection services)
         {
             services.AddScoped<ICourseServise, CourseServise>();
+
             return services;
         } 
 
