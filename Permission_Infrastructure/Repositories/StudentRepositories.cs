@@ -27,12 +27,22 @@ namespace Permission_Infrastructure.Repositories
 
         public async Task<Permission_Domen.Entityes.Student> Create(StudentDTO studentDTO)
         {
-            var stu = _autoMapper.Map<Student>(studentDTO);
-            stu.CreatedAt = DateTime.UtcNow; 
-            _appDbContext.Students.Add(stu);
-            await _appDbContext.SaveChangesAsync();
+            try
+            {
+                var stu = _autoMapper.Map<Student>(studentDTO);
+                stu.CreatedAt = DateTime.UtcNow;
+                _appDbContext.Students.Add(stu);
+                await _appDbContext.SaveChangesAsync();
+                _logger.LogInformation("ok");
 
-            return stu;
+                return stu;
+
+            }catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
+            }
+           
         }
 
         public async Task<Permission_Domen.Entityes.Student> Delete(int id)
@@ -41,11 +51,16 @@ namespace Permission_Infrastructure.Repositories
             {
                 var result = await _appDbContext.Students.FirstOrDefaultAsync(x => x.Id == id);
 
-                result.IsDeleted = true;
-                _appDbContext.Update(result);
-                await _appDbContext.SaveChangesAsync();
-                _logger.LogInformation("Ok");
-                return result;
+                if(result != null)
+                {
+                    result.IsDeleted = true;
+                    _appDbContext.Update(result);
+                    await _appDbContext.SaveChangesAsync();
+                    _logger.LogInformation("Ok");
+                    return result;
+                }
+                return null;
+              
             }catch(Exception ex)
             {
                 _logger.LogError(ex.Message);
@@ -73,25 +88,45 @@ namespace Permission_Infrastructure.Repositories
 
         public async Task<Permission_Domen.Entityes.Student> GetById(int id)
         {
-            return await _appDbContext.Students
+            try
+            {
+
+                _logger.LogInformation("ok");
+                return await _appDbContext.Students
                 .IgnoreQueryFilters()
                 .FirstOrDefaultAsync(x => x.Id == id);
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
+            }
+
         }
 
         public async Task<Permission_Domen.Entityes.Student> Update(int id, StudentDTO studentDTO)
         {
-            var result = await _appDbContext.Students.FirstOrDefaultAsync(x => x.Id == id);
 
-            var stu = new Permission_Domen.Entityes.Student();
-            result.Phone_Number = studentDTO.Phone_Number;
-            result.Name = studentDTO.Name;
-            result.UserID = studentDTO.UserID;
-            result.Email = studentDTO.Email;
-            result.CreatedAt = DateTime.UtcNow;
+            try
+            {
+                var result = await _appDbContext.Students.FirstOrDefaultAsync(x => x.Id == id);
+                var stu = new Permission_Domen.Entityes.Student();
+                result.Phone_Number = studentDTO.Phone_Number;
+                result.Name = studentDTO.Name;
+                result.UserID = studentDTO.UserID;
+                result.Email = studentDTO.Email;
+                result.CreatedAt = DateTime.UtcNow;
 
-            _appDbContext.Students.Update(result);
-            await _appDbContext.SaveChangesAsync();
-            return result;
+                _appDbContext.Students.Update(result);
+                await _appDbContext.SaveChangesAsync();
+                _logger.LogInformation("ok");
+                return result;
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
+            }
+
+          
 
         }
     }

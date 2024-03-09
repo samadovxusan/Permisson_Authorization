@@ -31,8 +31,4 @@
     <ProjectReference Include="..\Permission_Infrastructure\Permission_Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Log\" />
-  </ItemGroup>
-
 </Project>
