@@ -40,7 +40,7 @@ namespace Tests
                 Description = "Description",
                 Experience = "100 yil ",
                 PhoneNumber = "99 123-45-67",
-                Price = "$120 00011"
+                Price = "$120 000"
                 
             };
             mock.Setup(r => r.CreateAsync(It.IsAny<Teacher>()))
