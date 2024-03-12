@@ -24,7 +24,7 @@ namespace Permission_Application.Services.Teacher_S
             newtech.Price = entity.Price;
             newtech.PhoneNumber = entity.PhoneNumber;
             newtech.Experience = entity.Experience;
-            newtech.CreatedAt = DateTime.UtcNow;
+            //newtech.CreatedAt = DateTime.UtcNow;
 
             await _teacherRepositories.CreateAsync(newtech);
             return newtech;

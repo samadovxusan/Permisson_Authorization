@@ -103,23 +103,30 @@ namespace Permission_Infrastructure.Repositories
 
         }
 
-        public async Task<Permission_Domen.Entityes.Student> Update(int id, StudentDTO studentDTO)
+        public async Task<Student> Update(int id, StudentDTO studentDTO)
         {
 
             try
             {
                 var result = await _appDbContext.Students.FirstOrDefaultAsync(x => x.Id == id);
-                var stu = new Permission_Domen.Entityes.Student();
-                result.Phone_Number = studentDTO.Phone_Number;
-                result.Name = studentDTO.Name;
-                result.UserID = studentDTO.UserID;
-                result.Email = studentDTO.Email;
-                result.CreatedAt = DateTime.UtcNow;
+                //var stu = new Permission_Domen.Entityes.Student();
+                //result.Phone_Number = studentDTO.Phone_Number;
+                //result.Name = studentDTO.Name;
+                //result.UserID = studentDTO.UserID;
+                //result.Email = studentDTO.Email;
+                //result.CreatedAt = DateTime.UtcNow;
 
-                _appDbContext.Students.Update(result);
+                var resultDto = _autoMapper.Map<Student>(studentDTO);
+
+                resultDto.Id = result.Id;
+
+
+                
+
+                _appDbContext.Students.Update(resultDto);
                 await _appDbContext.SaveChangesAsync();
                 _logger.LogInformation("ok");
-                return result;
+                return resultDto;
             }catch(Exception ex)
             {
                 _logger.LogError(ex.Message);
