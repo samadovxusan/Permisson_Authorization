@@ -14,12 +14,10 @@ namespace Tests
 {
     public class TechaerTest
     {
-        private readonly IServiceTeacher _serviceTeacher;
-        private readonly Mock<ITeacherRepositories> mock;
+        private readonly Mock<IServiceTeacher> _mock = new Mock<IServiceTeacher>();
+
         public TechaerTest()
         {
-            this.mock = new Mock<ITeacherRepositories>();
-            this._serviceTeacher = new ServiceTeacher(this.mock.Object);
         }
         [Fact]
         public async Task AddAsync_ReturnCreateTeacher()
@@ -27,33 +25,36 @@ namespace Tests
             //Arrange
             var teacher = new TeacherDto 
             {
-                Name = "SUlton",
+                Name = "Ahmad",
                 Description = "Description",
-                Experience = "100 yil ",
+                Experience = "10 Year",
                 PhoneNumber = "99 123-45-67",
                 Price = "$120 000"
             };
             var expectedteacher = new Teacher
             {
-                Id = 0,
-                Name = "SUlton",
+                Id = 1,
+                Name = "Ahmad",
                 Description = "Description",
-                Experience = "100 yil ",
+                Experience = "10 Year ",
                 PhoneNumber = "99 123-45-67",
                 Price = "$120 000"
                 
             };
-            mock.Setup(r => r.CreateAsync(It.IsAny<Teacher>()))
-                .ReturnsAsync(expectedteacher); 
+            _mock.Setup(r => r.CreateAsync(It.IsAny<TeacherDto>()))
+                .ReturnsAsync(expectedteacher);  
 
             //Act
 
-            var result = await this._serviceTeacher.CreateAsync(teacher);
+            var result = await _mock.Object.CreateAsync(teacher);
 
             Assert.NotNull(result);
-            Assert.Equal(expectedteacher, result);
+             Assert.Equal(expectedteacher, result);
 
-            mock.Verify(r =>r.CreateAsync(It.IsAny<Teacher>()),Times.Once);
+
+
+            // Assert
+            _mock.Verify(r =>r.CreateAsync(It.IsAny<TeacherDto>()),Times.Once);
         }
     }
 }
