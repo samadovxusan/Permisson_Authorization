@@ -50,9 +50,6 @@ namespace Tests
 
             Assert.NotNull(result);
              Assert.Equal(expectedteacher, result);
-
-
-
             // Assert
             _mock.Verify(r =>r.CreateAsync(It.IsAny<TeacherDto>()),Times.Once);
         }
