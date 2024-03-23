@@ -14,7 +14,7 @@ namespace Permission_Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Student> builder)
         {
-            builder.HasQueryFilter(x => !x.IsDeleted); ;
+            builder.HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }
