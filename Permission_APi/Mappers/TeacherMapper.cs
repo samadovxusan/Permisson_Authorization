@@ -7,7 +7,7 @@ namespace Permission_APi.Mappers
     {
         public TeacherMapper()
         {
-            CreateMap<TeacherMapper, TeacherDto>().ReverseMap(); ;
+            CreateMap<TeacherMapper, TeacherDto>().ReverseMap();
         }
     }
 }

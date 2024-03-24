@@ -14,6 +14,6 @@ namespace Permission_Application.Abstractions.Generic
         Task<T> GetAsync(Expression<Func<T, bool>> expression);
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByAny(Expression<Func<T, bool>> expression);
-        Task<bool> DeleteAsync(Expression<Func<T, bool>> expression);
+        Task<bool> DeleteAsync(Expression<Func<T, bool>> expression);;
     }
 }
