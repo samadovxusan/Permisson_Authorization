@@ -26,7 +26,7 @@ namespace Permission_Application.Services.Teacher_S
             newtech.Experience = entity.Experience;
             //newtech.CreatedAt = DateTime.UtcNow;
 
-            await _teacherRepositories.CreateAsync(newtech); ;
+            await _teacherRepositories.CreateAsync(newtech);
             return newtech;
         }
 
