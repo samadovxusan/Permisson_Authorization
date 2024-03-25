@@ -17,6 +17,6 @@ namespace Permission_Application.Services.Teacher_S
         public Task<Teacher> CreateAsync(TeacherDto entity);
         public Task<Teacher> UpdateAsync(int id ,TeacherDto entity);
         public Task<bool> DeleteAsync(Expression<Func<Teacher, bool>> expression);
-        public Task<Teacher>GetById(int Id);;
+        public Task<Teacher>GetById(int Id);
     }
 }
