@@ -81,7 +81,7 @@ namespace Permission_Infrastructure.Generic
             }
             catch (Exception ex)
             {
-                throw; ;
+                throw;
             }
         }
 
